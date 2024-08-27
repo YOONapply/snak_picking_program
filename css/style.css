@@ -5,34 +5,48 @@
 }
 
 #container {
+    z-index: 0;
+    position: relative;
     width: 100vw;
-    height: 85vh;
+    height: 80vh;
     position: relative;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     /* background-image: url("../images/bg.jpg"); */
-    background: linear-gradient(#10c7d0, #9198e5);
+    background:blue;
     background-size: cover;
     background-repeat: no-repeat;
+}
+
+
+#container>#header>#home-btn{
+    width: 50px;
+    height: 50px;
+    margin: 20px;
+}
+#container>ul{
+    position: absolute;
+    top: 80vh;
+    left:45vw;
 }
 
 .snak {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 12vw;
-    height: 30vh;
+    width: 8vw;
+    height: 23vh;
     position: absolute;
     background-color: white;
     border-radius: 5%;
     top: 60%;
     z-index: 1;
-    font-size: 50px;
+    font-size: 20px;
     /* left: 40%; */
 }
 
 
-.snak:hover {
+#snak:hover {
     box-shadow: 5px 5px 5px gray;
 }
 
@@ -50,23 +64,27 @@
 
 #snak1 {
     animation: snak1 2s 1 forwards;
+    animation-play-state: paused;
 }
 
 #snak2 {
     animation: snak2 1.5s 1 ease-out 1s forwards;
+    animation-play-state: paused; 
 }
 
 #snak3 {
     animation: snak3 1.5s 1 ease-out 2s forwards;
+    animation-play-state: paused; 
 }
 
 /* ############################################################### */
 
 #btn_menu {
+    z-index: 2;
     width: 100vw;
-    height: 20vh;
-    background: linear-gradient(#6a5780, #9198e5);
-    position: fixed;
+    height: 21vh;
+    background: brown;
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -81,13 +99,41 @@
     font-size: 1.3rem;
 }
 
+#game-start-btn{
+    position: absolute;
+    top:0;
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    background-color: gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 4;
+}
+
+#start{
+    width: 300px;
+    height: 70px;
+    margin: 10px;
+    border-radius: 7px;
+    border: none;
+    color: white;
+    background-color: green;
+}
+
+#start:hover{
+    background-color: rgb(red, green, blue);
+}
+
 @keyframes snak1 {
     form {
         transform: translate(0, -5vh);
     }
 
     to {
-        transform: translate(-33vw, -40vh);
+        transform: translate(-23vw, -50vh);
     }
 }
 
@@ -97,7 +143,7 @@
     }
 
     to {
-        transform: translate(-7vw, -40vh);
+        transform: translate(0, -50vh);
     }
 }
 
@@ -107,9 +153,20 @@
     }
 
     to {
-        transform: translate(18vw, -40vh);
+        transform: translate(23vw, -50vh);
     }
 }
+
+@keyframes deg {
+    form {
+        transform: rotateY(0deg);
+    }
+
+    to {
+        transform: rotateY(180deg);
+    }
+}
+
 
 @media screen and (min-with:800px) {
     .snak {

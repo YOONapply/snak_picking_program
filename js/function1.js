@@ -4,30 +4,12 @@
 
 let ranArr = [];
 
-// const deg = document.querySelector(`snak${}`);
-// const keyFrames = document.createElement("style");
 
-// keyFrames.innerHTML = `
-//   @keyframes loading {
-//     from {
-//       transform: rotate(0deg);
-//     }
-//     to {
-//       transform: rotate(360deg);
-//     }
-//   }
-
-//   .loading {
-//     animation: loading 1s ease infinite;
-//   }
-// `;
-
-// loading.appendChild(keyFrames);
 
 while (true) {
-    let x = Math.floor(Math.random() * 5);
+    let x = Math.floor(Math.random() * 4);
     while (true) {
-        if (x == ranArr[0] || x == ranArr[1]) x = Math.floor(Math.random() * 5);
+        if (x == ranArr[0] || x == ranArr[1]) x = Math.floor(Math.random() * 4);
         else break;
     }
     ranArr.push(x)
@@ -40,7 +22,7 @@ console.log(ranArr)
 
 
 let count = 0;
-var arr = ["사탕", "초콜릿", "과자", "젤리", "아이스크림"];
+var arr = ["작은 꾸러미", "큰 꾸러미", "작은 꾸러미 2개!", "젤리", "아이스크림"];
 // ranArr.push(1)
 // console.log(ranArr);
 // var copy_arr = arr;
@@ -55,22 +37,106 @@ const image3 = document.getElementById("img3")
 image1.onclick = function () {
     snak1 = ranArr[0];
     console.log(snak1)
-    document.getElementById("snak1").innerHTML += arr[snak1];
-    document.getElementById("img1").remove();
+
+    const snakElement1 = document.getElementById("snak1");
+    // 애니메이션을 적용
+    const animation = snakElement1.animate(
+        [
+            // keyframes
+            {transform: "translate(-23vw, -50vh)"},
+            { transform: "translate(-23vw, -60vh) rotateY(720deg)" },
+            { transform: "translate(-23vw, -60vh) rotateY(360deg)" },
+            {transform: "translate(-23vw, -50vh)"},
+        ],
+        {
+            // options
+            duration: 3000,
+            iterations: 1,
+        }
+    );
+
+    animation.finished.then(() => {
+        // 애니메이션이 완료된 후 2초 기다림
+        setTimeout(() => {
+            // 이미지 삭제
+            document.getElementById("img1").remove();
+            // `snak3` 요소에 내용 추가
+            document.getElementById("snak1").innerHTML += arr[snak1];
+        }, 80); // 2000 밀리초 = 2초
+    }).catch(error => {
+        console.error('애니메이션 완료 확인 중 오류 발생:', error);
+    });
 }
 
 image2.onclick = function () {
     snak2 = ranArr[1];
     console.log(snak2)
-    document.getElementById("snak2").innerHTML += arr[snak2];
-    document.getElementById("img2").remove();
+
+    const snakElement2 = document.getElementById("snak2");
+    // 애니메이션을 적용
+    const animation = snakElement2.animate(
+        [
+            // keyframes
+            {transform: "translate(0, -50vh)"},
+            { transform: "translate(0, -60vh) rotateY(720deg)" },
+            { transform: "translate(0, -60vh) rotateY(360deg)" },
+            {transform: "translate(0, -50vh)"},
+        ],
+        {
+            // options
+            duration: 3000,
+            iterations: 1,
+        }
+    );
+
+    // 애니메이션이 완료되면 이미지 삭제
+    animation.finished.then(() => {
+        // 애니메이션이 완료된 후 2초 기다림
+        setTimeout(() => {
+            // 이미지 삭제
+            document.getElementById("img2").remove();
+            // `snak3` 요소에 내용 추가
+            document.getElementById("snak2").innerHTML += arr[snak2];
+        }, 80); // 2000 밀리초 = 2초
+    }).catch(error => {
+        console.error('애니메이션 완료 확인 중 오류 발생:', error);
+    });
 }
 
 image3.onclick = function () {
     snak3 = ranArr[2];
-    console.log(snak3)
-    document.getElementById("snak3").innerHTML += arr[snak3];
-    document.getElementById("img3").remove();
+    console.log(snak3);
+
+    const snakElement3 = document.getElementById("snak3");
+
+    // 애니메이션을 적용
+    const animation = snakElement3.animate(
+        [
+            // keyframes
+            {transform: "translate(23vw, -50vh)"},
+            { transform: "translate(23vw, -60vh) rotateY(720deg)" },
+            { transform: "translate(23vw, -60vh) rotateY(360deg)" },
+            {transform: "translate(23vw, -50vh)"},
+        ],
+        {
+            // options
+            duration: 3000,
+            iterations: 1,
+            
+        }
+    );
+
+    animation.finished.then(() => {
+        // 애니메이션이 완료된 후 2초 기다림
+        setTimeout(() => {
+            // 이미지 삭제
+            document.getElementById("img3").remove();
+            // `snak3` 요소에 내용 추가
+            document.getElementById("snak3").innerHTML += arr[snak3];
+        }, 80); // 2000 밀리초 = 2초
+    }).catch(error => {
+        console.error('애니메이션 완료 확인 중 오류 발생:', error);
+    });
 }
 
 
@@ -78,9 +144,7 @@ image3.onclick = function () {
 
 
 
-document.getElementById("all-check").onclick = function () {
-
-}
+let gameStart = document.getElementById("game-start-btn");
 
 document.getElementById("reset").onclick = function () {
     ranArr.length = 0;
@@ -106,46 +170,24 @@ document.getElementById("reset").onclick = function () {
 }
 
 
+document.getElementById("home-btn").onclick = function(){
+    document.getElementById("test").append(gameStart);
+    location.reload();//새로고침하는 코드
+}
 
+const del = "game-start-btn";
+document.getElementById("start").onclick = function(){
+    gameStart.remove()
+}
 
-// image1.onclick = function() {
-//     if (arr.length > 0) {
-//         let snak1 = Math.floor(Math.random() * arr.length);
-//         console.log(snak1)
-//         document.getElementById("snak1").innerHTML += arr[snak1];
-//         document.getElementById("img1").remove();
-//         arr.splice(snak1);
+let corrent = 0
 
-//     } else {
-//         document.getElementById("snak1").innerHTML = "No more items";
-//         console.log(snak1)
-//     }
-// }
+document.getElementById("all-check").onclick = function(){
+    if(corrent >= 0){
+        document.getElementById('snak1').style.animationPlayState = 'running';
+        document.getElementById('snak2').style.animationPlayState = 'running';
+        document.getElementById('snak3').style.animationPlayState = 'running';
+        corrent += 1
+    }
+}
 
-// image2.onclick = function() {
-//     if (arr.length > 0) {
-//         let snak2 = Math.floor(Math.random() * arr.length);
-//         console.log(snak2)
-//         document.getElementById("snak2").innerHTML += arr[snak2];
-//         document.getElementById("img2").remove();
-//         arr.splice(snak2);
-
-//     } else {
-//         document.getElementById("snak2").innerHTML = "No more items";
-//         console.log(snak2)
-//     }
-// }
-
-// image3.onclick = function() {
-//     if (arr.length > 0) {
-//         let snak3 = Math.floor(Math.random() * arr.length);
-//         console.log(snak3)
-//         document.getElementById("snak3").innerHTML += arr[snak3];
-//         document.getElementById("img3").remove();
-//         arr.splice(snak3);
-
-//     } else {
-//         document.getElementById("snak3").innerHTML = "No more items";
-//         console.log(snak3)
-//     }
-// }
